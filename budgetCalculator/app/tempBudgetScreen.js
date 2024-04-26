@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const BudgetCalculatorScreen = () => {
+function BudgetCalculatorScreen() {
+  const insets = useSafeAreaInsets();
+
   const [einkommen, setEinkommen] = useState('');
   const [miete, setMiete] = useState('');
   const [strom, setStrom] = useState('');
@@ -58,6 +61,14 @@ const BudgetCalculatorScreen = () => {
   );
 };
 
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <BudgetCalculatorScreen/>
+    </SafeAreaProvider>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -74,5 +85,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 });
-
-export default BudgetCalculatorScreen;
