@@ -9,6 +9,8 @@ function BudgetCalculatorScreen() {
   const [miete, setMiete] = useState('');
   const [strom, setStrom] = useState('');
   const [essen, setEssen] = useState('');
+  const [altersvorsorge, setAltersvorsorge] = useState('');
+  const [spargeld, setSpargeld] = useState('');
   const [output, setOutput] = useState('');
 
   const berechneBudget = () => {
@@ -16,9 +18,13 @@ function BudgetCalculatorScreen() {
     const mieteValue = parseFloat(miete);
     const stromValue = parseFloat(strom);
     const essenValue = parseFloat(essen);
+    const altersvorsorgeValue = einkommenValue * 0.1; 
+    const spargeldValue = einkommenValue * 0.1; 
 
     if (!isNaN(einkommenValue) && !isNaN(mieteValue) && !isNaN(stromValue) && !isNaN(essenValue)) {
-      const ergebnis = einkommenValue - mieteValue - stromValue - essenValue;
+      const ergebnis = einkommenValue - mieteValue - stromValue - essenValue - altersvorsorgeValue - spargeldValue;
+      setAltersvorsorge(altersvorsorgeValue.toFixed(2).toString());
+      setSpargeld(spargeldValue.toFixed(2).toString());
       setOutput(ergebnis.toFixed(2).toString());
     } else {
       setOutput('Ungültige Eingabe');
@@ -34,6 +40,7 @@ function BudgetCalculatorScreen() {
         value={einkommen}
         keyboardType="numeric"
       />
+      <title>Ausgaben</title>
       <Text>Miete:</Text>
       <TextInput
         style={styles.input}
@@ -53,6 +60,21 @@ function BudgetCalculatorScreen() {
         style={styles.input}
         onChangeText={setEssen}
         value={essen}
+        keyboardType="numeric"
+      />
+      <title>Sparen</title>
+      <Text>Altersvorsorge: Wird automatisch berechnet</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setAltersvorsorge}
+        value={altersvorsorge}
+        keyboardType="numeric"
+      />
+      <Text>Spargeld: Wird automatisch berechnet</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setSpargeld}
+        value={spargeld}
         keyboardType="numeric"
       />
       <Button title="Berechnen" onPress={berechneBudget} />
