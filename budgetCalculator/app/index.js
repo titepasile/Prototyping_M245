@@ -8,7 +8,10 @@ function BudgetCalculatorScreen() {
   const [einkommen, setEinkommen] = useState('');
   const [miete, setMiete] = useState('');
   const [strom, setStrom] = useState('');
-  const [essen, setEssen] = useState('');
+  const [versicherung, setVersicherung] = useState('');
+  const [haustierkosten, setHaustierkosten] = useState('');
+  const [abos, setAbos] = useState('');
+
   const [altersvorsorge, setAltersvorsorge] = useState('');
   const [spargeld, setSpargeld] = useState('');
   const [output, setOutput] = useState('');
@@ -17,12 +20,15 @@ function BudgetCalculatorScreen() {
     const einkommenValue = parseFloat(einkommen);
     const mieteValue = parseFloat(miete);
     const stromValue = parseFloat(strom);
-    const essenValue = parseFloat(essen);
+    const versicherungValue = parseFloat(versicherung);
+    const haustierkostenValue = parseFloat(haustierkosten);
+    const abosValue = parseFloat(abos);
+
     const altersvorsorgeValue = einkommenValue * 0.1; 
     const spargeldValue = einkommenValue * 0.1; 
 
-    if (!isNaN(einkommenValue) && !isNaN(mieteValue) && !isNaN(stromValue) && !isNaN(essenValue)) {
-      const ergebnis = einkommenValue - mieteValue - stromValue - essenValue - altersvorsorgeValue - spargeldValue;
+    if (!isNaN(einkommenValue) && !isNaN(mieteValue) && !isNaN(stromValue) && !isNaN(versicherungValue) && !isNaN(haustierkostenValue)) {
+      const ergebnis = einkommenValue - mieteValue - stromValue - versicherungValue - haustierkostenValue - abosValue - altersvorsorgeValue - spargeldValue;
       setAltersvorsorge(altersvorsorgeValue.toFixed(2).toString());
       setSpargeld(spargeldValue.toFixed(2).toString());
       setOutput(ergebnis.toFixed(2).toString());
@@ -55,11 +61,25 @@ function BudgetCalculatorScreen() {
         value={strom}
         keyboardType="numeric"
       />
-      <Text>Essen:</Text>
+      <Text>Versicherung:</Text>
       <TextInput
         style={styles.input}
-        onChangeText={setEssen}
-        value={essen}
+        onChangeText={setVersicherung}
+        value={versicherung}
+        keyboardType="numeric"
+      />
+      <Text>Haustierkosten:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setHaustierkosten}
+        value={haustierkosten}
+        keyboardType="numeric"
+      />
+      <Text>Abonements:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setAbos}
+        value={abos}
         keyboardType="numeric"
       />
       <title>Sparen</title>
